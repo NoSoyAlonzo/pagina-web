@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Name Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h1>Business Name Generator</h1>
+        <form method="POST" action="/generate_names">
+            <label for="keyword">Favorite Keyword:</label>
+            <input type="text" id="keyword" name="keyword" required>
+            
+            <label for="category">Select Category:</label>
+            <select id="category" name="category" required>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.category_name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Generate Names</button>
+        </form>
+
+        <h2>Generated Names:</h2>
+        <ul>
+            {% if generated_names %}
+                {% for name in generated_names %}
+                <li>{{ name }}</li>
+                {% endfor %}
+            {% else %}
+                <li>No names generated yet.</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Business Name Generator. All rights reserved.</p>
+    </footer>
+</body>
+</html>
